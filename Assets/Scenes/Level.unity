@@ -1245,11 +1245,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a11bf74ed692c8e4cbd48392d48aa4c0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _container: {fileID: 513256799}
-  _capacity: 15
-  _coinLine: {fileID: 264089270784245961, guid: ec929732cd891174dad96832224610f5,
+  _template: {fileID: 264089270784245961, guid: ec929732cd891174dad96832224610f5,
     type: 3}
   _secondsBetweenSpawn: 2.5
+  _spawnRangeA: 1
+  _spawnRangeB: 12
+  _container: {fileID: 513256799}
+  _capacity: 15
 --- !u!4 &290177387
 Transform:
   m_ObjectHideFlags: 0
@@ -2814,9 +2816,16 @@ MonoBehaviour:
   m_GameObject: {fileID: 924834610}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 921f196f48f9db94a95764d4dfb61b82, type: 3}
+  m_Script: {fileID: 11500000, guid: a11bf74ed692c8e4cbd48392d48aa4c0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _template: {fileID: 6030197734670297107, guid: 8307c6db76bdddb4eac164988746d8ad,
+    type: 3}
+  _secondsBetweenSpawn: 1.5
+  _spawnRangeA: 1
+  _spawnRangeB: 12
+  _container: {fileID: 955311987}
+  _capacity: 50
 --- !u!4 &924834612
 Transform:
   m_ObjectHideFlags: 0
@@ -4357,9 +4366,16 @@ MonoBehaviour:
   m_GameObject: {fileID: 1370932648}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a400b0c38f646434e81431985d2f01d7, type: 3}
+  m_Script: {fileID: 11500000, guid: a11bf74ed692c8e4cbd48392d48aa4c0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _template: {fileID: 264089270784245961, guid: ec929732cd891174dad96832224610f5,
+    type: 3}
+  _secondsBetweenSpawn: 3.5
+  _spawnRangeA: 1
+  _spawnRangeB: 12
+  _container: {fileID: 513256799}
+  _capacity: 50
 --- !u!1 &1375538265
 GameObject:
   m_ObjectHideFlags: 0
@@ -5589,9 +5605,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _container: {fileID: 955311987}
   _capacity: 30
+  _pool: []
   _template: {fileID: 6030197734670297107, guid: 8307c6db76bdddb4eac164988746d8ad,
     type: 3}
   _secondsBetweenSpawn: 0.9
+  _elapsedTime: 0
+  _currentOffset: {x: 0, y: 0, z: 0}
 --- !u!4 &1701116646
 Transform:
   m_ObjectHideFlags: 0

@@ -7,8 +7,8 @@ using TMPro;
 
 public class CreatorsButton : MonoBehaviour
 {
-    [SerializeField] private CanvasGroup _creatorsPanelCanvasGroup;
-    [SerializeField] private Button _backToMenuButton;
+    [SerializeField] private CanvasGroup _creatorsPanel;
+    [SerializeField] private Button _backToMenu;
     [SerializeField] private float _fadeTime;
 
     private bool _isClickOnBackButton = false;
@@ -16,13 +16,13 @@ public class CreatorsButton : MonoBehaviour
 
     public void OnButtonClick ()
     {
-        _creatorsPanelCanvasGroup.gameObject.SetActive(true);
-        _creatorsPanelCanvasGroup.DOFade(1, _fadeTime);
+        _creatorsPanel.gameObject.SetActive(true);
+        _creatorsPanel.DOFade(1, _fadeTime);
     }
 
     public void OnBackButtonClick ()
     {
-        _creatorsPanelCanvasGroup.DOFade(0, _fadeTime);
+        _creatorsPanel.DOFade(0, _fadeTime);
         _isClickOnBackButton = true;
     }
 
@@ -30,11 +30,13 @@ public class CreatorsButton : MonoBehaviour
     {
         if (_isClickOnBackButton)
         {
+            if(_creatorsPanel)
+
             _elapsedTime += Time.fixedDeltaTime;
 
             if (_elapsedTime >= _fadeTime)
             {
-                _creatorsPanelCanvasGroup.gameObject.SetActive(false);
+                _creatorsPanel.gameObject.SetActive(false);
 
                 _elapsedTime = 0;
                 _isClickOnBackButton = false;
