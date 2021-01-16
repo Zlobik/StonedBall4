@@ -2,56 +2,24 @@
 using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
+using System;
 
 public class GameObjectsGenerator : MonoBehaviour
 {
     [SerializeField] private GameObject _template;
+    [SerializeField] private Transform _container;
     [SerializeField] private float _secondsBetweenSpawn = 1f;
     [SerializeField] private int _spawnRangeA = 1;
     [SerializeField] private int _spawnRangeB = 12;
 
-    [SerializeField] private GameObject _container;
-    [SerializeField] private int _capacity;
-
-    private List<GameObject> _pool = new List<GameObject>();
     private float _elapsedTime = 0;
 
-    private void Start ()
+    private void Spawn ()
     {
-        Initialize(_template);
-    }
+        GameObject let = Instantiate(_template, _container);
 
-    private void SpawnNewObject ()
-    {
-        if (TryGetObject(out GameObject let))
-        {
-            Vector3 spawnPoint = new Vector3(transform.position.x + Random.Range(_spawnRangeA, _spawnRangeB), transform.position.y, transform.position.z);
-            let.SetActive(true);
-            let.transform.position = spawnPoint;
-        }
-    }
-
-    private void Initialize (GameObject prefab)
-    {
-        for (int i = 0; i < _capacity; i++)
-        {
-            GameObject spawned = Instantiate(prefab, _container.transform);
-            spawned.SetActive(false);
-            _pool.Add(spawned);
-        }
-    }
-
-    private bool TryGetObject (out GameObject result)
-    {
-        result = _pool.FirstOrDefault(p => p.activeSelf == false);
-
-        return result != null;
-    }
-
-    public void ResetPool ()
-    {
-        foreach (var item in _pool)
-            item.SetActive(false);
+        let.transform.position = new Vector3(transform.position.x + UnityEngine.Random.Range(_spawnRangeA, _spawnRangeB), transform.position.y);
+        let.SetActive(true);
     }
 
     private void Update ()
@@ -61,8 +29,7 @@ public class GameObjectsGenerator : MonoBehaviour
         if (_elapsedTime >= _secondsBetweenSpawn)
         {
             _elapsedTime = 0;
-
-            SpawnNewObject();
+            Spawn();
         }
     }
 }
