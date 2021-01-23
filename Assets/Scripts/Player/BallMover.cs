@@ -16,22 +16,28 @@ public class BallMover : MonoBehaviour
         _isGrounded = true;
     }
 
-    private void Move (int value)
+    private void Move (int speed)
     {
-        transform.position = Vector3.MoveTowards(transform.position, new Vector3(transform.position.x + value, transform.position.y, transform.position.z), _moveSpeed * Time.deltaTime);
+        transform.position = new Vector3(transform.position.x + (speed * _moveSpeed * Time.deltaTime), transform.position.y);
     }
 
     private void Update ()
     {
         if (Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.RightArrow))
+        {
             Move(1);
+        }
         if (Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.LeftArrow))
+        {
             Move(-1);
+        }
         if (Input.GetKeyDown(KeyCode.Space))
+        {
             if (_isGrounded)
             {
                 transform.DOMoveY(transform.position.y + _jumpHeight, _jumpDuration);
                 _isGrounded = false;
             }
+        }
     }
 }
