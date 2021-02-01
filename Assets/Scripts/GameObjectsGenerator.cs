@@ -4,35 +4,29 @@ using UnityEngine;
 using System.Linq;
 using System;
 
-public class GameObjectsGenerator : MonoBehaviour
+public class GameObjectsGenerator : Pool
 {
-    [SerializeField] private GameObject _template;
-    [SerializeField] private Transform _pullFather;
-    [SerializeField] private int _pullCapacity;
     [SerializeField] private float _secondsBetweenSpawn = 1f;
-    [SerializeField] private int _spawnRangeA = 1;
-    [SerializeField] private int _spawnRangeB = 12;
+    [SerializeField] private Range _range;
 
     private float _elapsedTime = 0;
-    private Pull _pull;
 
     private void Start ()
     {
-        _pull = new Pull();
-        _pull.SetContainer(_pullFather, _pullCapacity);
-        _pull.Initialize(_template);
+        Initialize();
     }
 
     private Vector3 GetSpawnPointPosition ()
     {
-        Vector3 spawnPoint = new Vector3(transform.position.x + UnityEngine.Random.Range(_spawnRangeA, _spawnRangeB), transform.position.y, transform.position.z);
+        int randomDistance = UnityEngine.Random.Range(_range.Min, _range.Max);
+        Vector3 spawnPoint = new Vector3(transform.position.x + randomDistance, transform.position.y);
 
         return spawnPoint;
     }
 
     private void Spawn ()
     {
-        if (_pull.TryGetObject(out GameObject let))
+        if (TryGetObject(out GameObject let))
         {
             let.transform.position = GetSpawnPointPosition();
             let.SetActive(true);
@@ -52,23 +46,19 @@ public class GameObjectsGenerator : MonoBehaviour
     }
 }
 
-public class Pull : MonoBehaviour
+public class Pool : MonoBehaviour
 {
+    [SerializeField] private Transform _poolParent;
+    [SerializeField] private GameObject _template;
+    [SerializeField] private int _pullCapacity;
+
     private List<GameObject> _pool = new List<GameObject>();
-    private Transform _container;
-    private int _containerCapacity;
 
-    public void SetContainer (Transform container, int capacity)
+    public void Initialize ()
     {
-        _container = container;
-        _containerCapacity = capacity;
-    }
-
-    public void Initialize (GameObject prefab)
-    {
-        for (int i = 0; i < _containerCapacity; i++)
+        for (int i = 0; i < _pullCapacity; i++)
         {
-            GameObject spawned = Instantiate(prefab, _container);
+            GameObject spawned = Instantiate(_template, _poolParent);
             spawned.SetActive(false);
             _pool.Add(spawned);
         }
@@ -86,4 +76,11 @@ public class Pull : MonoBehaviour
         foreach (var item in _pool)
             item.SetActive(false);
     }
+}
+
+[System.Serializable]
+public class Range
+{
+    public int Min;
+    public int Max;
 }

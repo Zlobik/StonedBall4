@@ -2767,13 +2767,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a11bf74ed692c8e4cbd48392d48aa4c0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _poolParent: {fileID: 955311988}
   _template: {fileID: 6030197734670297107, guid: 8307c6db76bdddb4eac164988746d8ad,
     type: 3}
-  _pullFather: {fileID: 955311988}
-  _pullCapacity: 10
+  _pullCapacity: 15
   _secondsBetweenSpawn: 1.5
-  _spawnRangeA: 1
-  _spawnRangeB: 12
+  _range:
+    Min: 0
+    Max: 15
 --- !u!4 &924834612
 Transform:
   m_ObjectHideFlags: 0
@@ -4317,13 +4318,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a11bf74ed692c8e4cbd48392d48aa4c0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _poolParent: {fileID: 513256800}
   _template: {fileID: 264089270784245961, guid: ec929732cd891174dad96832224610f5,
     type: 3}
-  _pullFather: {fileID: 513256800}
   _pullCapacity: 15
   _secondsBetweenSpawn: 3.5
-  _spawnRangeA: 1
-  _spawnRangeB: 12
+  _range:
+    Min: 0
+    Max: 10
 --- !u!1 &1375538265
 GameObject:
   m_ObjectHideFlags: 0
@@ -5062,7 +5064,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 60.95
+  m_fontSize: 53.05
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
